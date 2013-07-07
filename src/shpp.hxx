@@ -47,7 +47,7 @@ bool parser(string script_file);
 /*
 follows command until its NULL
  */
-string follow(command *target, string want);
+bool follow(command *target, string want);
 
 /*
   global link to the current command
