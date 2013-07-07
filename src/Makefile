@@ -1,6 +1,6 @@
 CXX=g++
 TARGET=shppc
-OBJS=main.o help.o
+OBJS=main.o help.o follow.o
 HEADER=shpp.hxx help.hxx
 override CXXFLAGS+=-std=c++11 -Wall
 

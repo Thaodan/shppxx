@@ -5,10 +5,6 @@
 using std::string;
 using std::ofstream;
 
-void stub(void) {
-  std::cout << "stub";
-}
-
 #define MAX_COMMAND_ARGS 9
 /*
   this is our command type
@@ -32,9 +28,6 @@ typedef struct {
   command *commands;
 } script;
 
-namespace defines {
-  string *stack;
-}
 /*
   parser does:
   open file
