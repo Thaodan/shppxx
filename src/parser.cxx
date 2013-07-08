@@ -1,6 +1,5 @@
 #include "shpp.hxx"
 #include "commands/commands.hxx"
-#include <boost/tr1/regex.hpp>
 
 void stub(void) {
     std::cout << "stub";
@@ -80,6 +79,8 @@ script parse(ifstream *scriptfile)
 	{
 	    if ( command_index < command_counter )
 	    {
+		if ( settings.verbose )
+		    (command_stack+command_index)->line_ued=line_index;
 		(command_stack+command_index)->raw_string=line;
 		//std::cerr << (command_stack+command_index)->raw_string << std::endl;
 		command_index++;
@@ -97,6 +98,8 @@ bool run(script *Script, ifstream *scriptfile, ofstream *outputfile)
     int command_index=0;
     while ( command_index < Script->command_count)
     {
+	msg::verbose("L"+std::to_string(Script->commands[command_index].line_ued) + ": found XXX raw string is '"
+		+ Script->commands[command_index].raw_string +"'" );
 	*outputfile << Script->commands[command_index].raw_string << std::endl;
 	command_index++;
     }

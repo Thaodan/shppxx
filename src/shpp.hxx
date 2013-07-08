@@ -2,6 +2,8 @@
 #define SHPP_HXX
 #include <iostream>
 #include <fstream>
+#include <boost/tr1/regex.hpp>
+#include <boost/filesystem.hpp> 
 using std::string;
 using std::ifstream;
 using std::ofstream;
@@ -15,18 +17,19 @@ using std::ofstream;
 */
 typedef struct command commmand;
 struct command{
-  string raw_string;
-  command *father=NULL;
-  command **childs;
-  string args[MAX_COMMAND_ARGS];
+    string raw_string;
+    int line_ued;
+    command *father=NULL;
+    command **childs;
+    string args[MAX_COMMAND_ARGS];
 };
 
 /*
   contains just the commands of a file
 */
 typedef struct {
-  command *commands;
-  int command_count;
+    command *commands;
+    int command_count;
 } script;
 
 typedef struct {

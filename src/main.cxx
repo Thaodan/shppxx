@@ -5,7 +5,7 @@ using namespace std;
 extern "C" {
 #include "getopt.h"
 };
-#include <boost/filesystem.hpp> 
+
 
 
 #define DEFAULT_OUTPUT STDOUT
@@ -15,14 +15,14 @@ int main(int argc, char *argv[])
 {
     float appver=APPVER;
     int stdoutput=0;
-#define INPUT_OPTIONS "hHVf:o:"
+#define INPUT_OPTIONS "hHVvf:o:"
     static struct option long_options[] {
 	{ "help", 0, 0, 'h' },
 	{ "long-help",0 , 0,'H'},
 	{"version",0, 0,'V'},
 	{ "mode", 1, 0, 'm'},
 	{"stdout", 0, &stdoutput, 1},
-	{"verbose", 0, &settings.verbose, 1}
+	{"verbose", 0, 0, 'v'}
     };
     int input_character;
     int this_option_optind;
@@ -46,6 +46,9 @@ int main(int argc, char *argv[])
 	case 'H':
 	    display_long_help();
 	    return 0;
+	case 'v':
+	    settings.verbose=1;
+	    break;
 	case 'V':
 	    cout << appver << endl;
 	    return 0;
