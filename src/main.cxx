@@ -1,5 +1,6 @@
 #include "shpp.hxx"
 #include "help.hxx"
+#include "config.hxx"
 using namespace std;
 extern "C" {
 #include "getopt.h"
@@ -7,26 +8,28 @@ extern "C" {
 #include <boost/filesystem.hpp> 
 
 
-#define INPUT_OPTIONS "hf:o:"
 #define DEFAULT_OUTPUT STDOUT
 
 
 int main(int argc, char *argv[])
 {
+  float appver=APPVER;
+  #define INPUT_OPTIONS "hHVf:o:"
+  static struct option long_options[] {
+    { "help", 0, 0, 'h' },
+      { "long-help",0 , 0,'H'},
+	{"version",0, 0,'V'},
+	  { "mode", 1, 0, 'm'}
+  };
+
   int input_character;
   int digit_optind = 0;
   int aopt=0, bopt=0;
   string mode;
   int mode_int;
   char *copt=0, *dopt = 0;
-  static struct option long_options[] {
-    { "help", 0, 0, 'h' },
-    { "mode", 1, 0, 'm'}
-  };
   int optind = 0;
   int option_index = 0;
-
-
 
   string inputfile_raw;
   string outputfile_raw;
@@ -38,6 +41,12 @@ int main(int argc, char *argv[])
         {
         case 'h':
 	  display_help();
+	  return 0;
+	case 'H':
+	  display_long_help();
+	  return 0;
+	case 'V':
+	  cout << appver << endl;
 	  return 0;
 	case 'f':
 	  inputfile_raw = optarg;
@@ -99,7 +108,7 @@ int main(int argc, char *argv[])
     {
       cerr << "warning no output file using stdout as default" << endl;
       // FIXME: need portable way to write to STDOUT
-      outputfile_raw = "/dev/stdout";
+      outputfile_raw = "/dev/stdout";;
     }
 
   return parser(inputfile_raw, outputfile_raw, mode_int);

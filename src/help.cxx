@@ -1,9 +1,13 @@
 #include <iostream>
 #include "help.hxx"
 #include "utils.hxx"
+#include "config.hxx"
+
 void display_help(void)
 {
-  static std::string help_msg = R"HELP_MSG(
+  std::string appname = APPNAME;
+  float appver=APPVER;
+  const std::string help_msg = R"HELP_MSG(
 * OPTIONS  
   - --help        -H -h ::              print this help
   - --version     -v    ::              print version
@@ -21,6 +25,15 @@ void display_help(void)
   -                  -Mpath        ::   same just for macros
   - --tmp=tmp_dir                  ::   set temp directory (use before *-D* or this has no effect)
   - --keep                         ::   don't delete tmp files after running
+)HELP_MSG";
+  std::cout << appname << " - " << appver <<" help" << std::endl;
+  std::cout << help_msg << std::endl;
+}
+
+void display_long_help(void)
+{
+  display_help();
+  static std::string help_msg = R"HELP_MSG(
 * COMMANDS
 ** define
    define  variable
