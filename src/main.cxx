@@ -9,35 +9,32 @@ extern "C" {
 
 
 #define DEFAULT_OUTPUT STDOUT
-
+state_container settings;
 
 int main(int argc, char *argv[])
 {
     float appver=APPVER;
-    int mode_int, stdoutput=0;
+    int stdoutput=0;
 #define INPUT_OPTIONS "hHVf:o:"
     static struct option long_options[] {
 	{ "help", 0, 0, 'h' },
 	{ "long-help",0 , 0,'H'},
 	{"version",0, 0,'V'},
 	{ "mode", 1, 0, 'm'},
-	{"stdout", 0, &stdoutput, 1}
+	{"stdout", 0, &stdoutput, 1},
+	{"verbose", 0, &settings.verbose, 1}
     };
-
     int input_character;
-    int digit_optind = 0;
-    int aopt=0, bopt=0;
+    int this_option_optind;
     string mode;
-    char *copt=0, *dopt = 0;
     int optind = 0;
     int option_index = 0;
 
     string inputfile_raw;
     string outputfile_raw;
-    while (
-	(input_character = getopt_long(argc, argv, INPUT_OPTIONS, long_options, &option_index)) != -1)
+    while ( (input_character = getopt_long(argc, argv, INPUT_OPTIONS, long_options, &option_index)) != -1 )
     {
-	int this_option_optind = optind ? optind: 1;
+	this_option_optind = optind ? optind: 1;
 	if ( input_character == -1 )
 	    break;
 
@@ -100,9 +97,9 @@ int main(int argc, char *argv[])
       check if parse mode is cpp
     */
     if ( mode == "c" )
-	mode_int=1;
+	settings.mode=1;
     else
-	mode_int=0;
+	settings.mode=0;
 
     /*
       check if we got no output_file
@@ -115,5 +112,5 @@ int main(int argc, char *argv[])
 	outputfile_raw = "/dev/stdout";;
     }
 
-    return parser(inputfile_raw, outputfile_raw, mode_int);
+    return parser(inputfile_raw, outputfile_raw);
 }

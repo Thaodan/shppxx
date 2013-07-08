@@ -29,15 +29,19 @@ typedef struct {
   int command_count;
 } script;
 
+typedef struct {
+    int mode;
+    int verbose;
+} state_container;
 /*
   parser does:
   open file
   calls script=parse(file);
   calls run(&script, &file);
 */
-script parse(ifstream *scriptfile, int mode);
+script parse(ifstream *scriptfile);
 bool run(script *Script, ifstream *scriptfile, ofstream *outputfile);
-bool parser(string scriptfile_raw, string outputfile_raw, int mode);
+bool parser(string scriptfile_raw, string outputfile_raw);
 /*
   follows command until its NULL
 */
@@ -47,4 +51,5 @@ bool follow(command *target, string want1, string want2);
   global link to the current command
 */
 extern command *self;
+extern state_container settings;
 #endif

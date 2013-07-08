@@ -5,7 +5,7 @@
 void stub(void) {
     std::cout << "stub";
 }
-bool parser(string scriptfile_raw, string outputfile_raw, int mode)
+bool parser(string scriptfile_raw, string outputfile_raw)
 {
     ifstream scriptfile;
     ofstream outputfile;
@@ -26,7 +26,7 @@ bool parser(string scriptfile_raw, string outputfile_raw, int mode)
 		  << outputfile_raw << std::endl;
 	return false;
     }
-    Script = parse(&scriptfile, mode);
+    Script = parse(&scriptfile);
     part_state = run(&Script, &scriptfile, &outputfile);
     scriptfile.close();
     outputfile.close();
@@ -35,7 +35,7 @@ bool parser(string scriptfile_raw, string outputfile_raw, int mode)
 
 #define REGEX_MODE std::tr1::regex::egrep
 command *self;
-script parse(ifstream *scriptfile, int mode)
+script parse(ifstream *scriptfile)
 {
     string line;
     script Script;
@@ -62,7 +62,7 @@ script parse(ifstream *scriptfile, int mode)
     while ( getline(*scriptfile, line))
     {
 	line_index++;
-	if ( std::tr1::regex_search(line.c_str(),  modes[mode]) )
+	if ( std::tr1::regex_search(line.c_str(),  modes[settings.mode]) )
 	    command_counter++;
     }
     /* reset states*/
@@ -76,7 +76,7 @@ script parse(ifstream *scriptfile, int mode)
     while ( getline(*scriptfile, line))
     {
 	line_index++;
-	if ( std::tr1::regex_search(line.c_str(),  modes[mode]) )
+	if ( std::tr1::regex_search(line.c_str(),  modes[settings.mode]) )
 	{
 	    if ( command_index < command_counter )
 	    {
