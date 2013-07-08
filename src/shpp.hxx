@@ -3,8 +3,8 @@
 #include <iostream>
 #include <fstream>
 using std::string;
+using std::ifstream;
 using std::ofstream;
-
 #define MAX_COMMAND_ARGS 9
 /*
   this is our command type
@@ -26,6 +26,7 @@ struct command{
  */
 typedef struct {
   command *commands;
+  int command_count;
 } script;
 
 /*
@@ -34,13 +35,13 @@ typedef struct {
   calls script=parse(file);
   calls run(&script, &file);
  */
-script parse(ofstream *script_file);
-bool run(script *scriptfile, ofstream *scriptfile_raw);
-bool parser(string script_file);
+script parse(ifstream *scriptfile, int mode);
+bool run(script *Script, ifstream *scriptfile, ofstream *outputfile);
+bool parser(string scriptfile_raw, string outputfile_raw, int mode);
 /*
 follows command until its NULL
  */
-bool follow(command *target, string want);
+bool follow(command *target, string want1, string want2);
 
 /*
   global link to the current command

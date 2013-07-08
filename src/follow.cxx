@@ -1,8 +1,8 @@
 #include "shpp.hxx"
 /* follow command until command->father is NULL */
-bool follow(command *target, string want[2])
+bool follow(command *target, string want1, string want2)
 {
-  while ( target->father->args[0] == want[0] || target->father->args[0] == want[1]
+  while ( target->father->args[0] == want1 || target->father->args[0] == want2
 	  || target->father == NULL)
     {
       target=target->father;

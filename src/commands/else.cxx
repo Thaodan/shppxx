@@ -4,7 +4,7 @@
 bool Else(void)
 {
   /* follow current command and see if father of it is if */
-  if (follow(self, {"if", "if" }))
+  if (follow(self, "if", "if" ))
     return true;
   else
     return false;
