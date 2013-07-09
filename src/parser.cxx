@@ -1,9 +1,7 @@
 #include "shpp.hxx"
 #include "commands/commands.hxx"
 
-void stub(void) {
-    std::cout << "stub";
-}
+/* the control part of our parser, it creates streams and calls our sub functions*/
 bool parser(string scriptfile_raw, string outputfile_raw)
 {
     ifstream scriptfile;
@@ -85,11 +83,14 @@ script parse(ifstream *scriptfile)
 	}
     }
   
+    /*
+      finally we save commands and how many we got to our script struct
+     */
     Script.commands=command_stack;
     Script.command_count=command_counter;
     return Script;
 }
-
+/* do what we got from parse() */
 bool run(script *Script, ifstream *scriptfile, ofstream *outputfile)
 {
     int command_index=0;
