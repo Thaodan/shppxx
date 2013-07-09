@@ -3,7 +3,8 @@
 #include <iostream>
 #include <fstream>
 #include <boost/tr1/regex.hpp>
-#include <boost/filesystem.hpp> 
+#include <boost/filesystem.hpp>
+#include <boost/algorithm/string.hpp>
 using std::string;
 using std::ifstream;
 using std::ofstream;
@@ -21,7 +22,7 @@ struct command{
     int line_ued;
     command *father=NULL;
     command **childs;
-    string args[MAX_COMMAND_ARGS];
+    std::vector<std::string> args;
 };
 
 /*

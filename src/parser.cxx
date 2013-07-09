@@ -38,10 +38,8 @@ script parse(ifstream *scriptfile)
 {
     string line;
     script Script;
-    int line_index=0;
-    int command_index=0;
-  
-    int command_counter=0;
+    int line_index=0, command_index=0, command_counter=0;
+    std::vector<std::string> args;
     /*
       parse modes:
       0: shpp : sh
@@ -69,7 +67,6 @@ script parse(ifstream *scriptfile)
     /* reset state of scriptfile */
     scriptfile->clear();
     scriptfile->seekg(0, std::ios::beg);
-
     static command *command_stack = new command[command_counter];
        
     while ( getline(*scriptfile, line))
@@ -81,8 +78,8 @@ script parse(ifstream *scriptfile)
 	    {
 		if ( settings.verbose )
 		    (command_stack+command_index)->line_ued=line_index;
-		(command_stack+command_index)->raw_string=line;
-		//std::cerr << (command_stack+command_index)->raw_string << std::endl;
+		(command_stack+command_index)->raw_string=std::tr1::regex_replace(line, modes[settings.mode], "");		//std::cerr << (command_stack+command_index)->raw_string << std::endl;
+		boost::split((command_stack+command_index)->args,(command_stack+command_index)->raw_string, boost::is_any_of("\t "));
 		command_index++;
 	    }
 	}
