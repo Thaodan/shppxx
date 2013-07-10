@@ -61,6 +61,8 @@ int main(int argc, char *argv[])
 	case 'o':
 	    outputfile_raw = optarg;
 	    break;
+	case '?':
+	    return 1;
         default:
 	    break;
         }
