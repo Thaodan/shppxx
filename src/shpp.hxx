@@ -33,8 +33,9 @@ typedef struct {
     int command_count;
 } script;
 
+#define DEFAUL_MODE_STR "#\\\\"
 typedef struct {
-    int mode;
+    string mode_str=DEFAUL_MODE_STR;
     int verbose;
 } state_container;
 /*

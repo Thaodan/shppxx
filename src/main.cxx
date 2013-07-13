@@ -24,12 +24,13 @@ int main(int argc, char *argv[])
 	{"stdout", 0, &stdoutput, 1},
 	{"verbose", 0, 0, 'v'}
     };
-    int input_character;
-    int this_option_optind;
-    string mode;
-    int optind = 0;
-    int option_index = 0;
-
+    int input_character, this_option_optind;
+    std::map< std::string, std::string> mode_strs;
+    std::map<std::string, std::string>::iterator mode_str_it; 
+    mode_strs["shpp"] = "#\\\\";
+    mode_strs["cpp"] = "#";
+    string mode_str;
+    int optind = 0, option_index = 0;
     string inputfile_raw;
     string outputfile_raw;
     while ( (input_character = getopt_long(argc, argv, INPUT_OPTIONS, long_options, &option_index)) != -1 )
@@ -56,7 +57,7 @@ int main(int argc, char *argv[])
 	    inputfile_raw = optarg;
 	    break;
 	case 'm':
-	    mode = optarg;
+	    mode_str = optarg;
 	    break;
 	case 'o':
 	    outputfile_raw = optarg;
@@ -101,10 +102,13 @@ int main(int argc, char *argv[])
     /*
       check if parse mode is cpp
     */
-    if ( mode == "c" )
-	settings.mode=1;
-    else
-	settings.mode=0;
+    mode_str_it = mode_strs.find(mode_str);
+    if ( mode_str_it == mode_strs.end() )
+    {
+	cerr << "Unkown mode " << mode_str << endl;
+	return 1;
+    }
+    settings.mode_str = mode_str_it->second;
 
     /*
       check if we got no output_file

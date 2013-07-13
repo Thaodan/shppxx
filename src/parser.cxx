@@ -37,16 +37,7 @@ script parse(ifstream *scriptfile)
     string line;
     script Script;
     int line_index=0, command_index=0, command_counter=0;
-    std::vector<std::string> args;
-    /*
-      parse modes:
-      0: shpp : sh
-      1: CPU  : c
-    */
-    std::tr1::regex modes[2] = {
-	std::tr1::regex("^#\\\\", REGEX_MODE ),
-	std::tr1::regex("^#")
-    };
+    std::tr1::regex mode_str( settings.mode_str, REGEX_MODE);
     std::tr1::regex end_line("\n");
     std::tr1::regex end_char(";");
     std::tr1::cmatch match;
@@ -57,7 +48,7 @@ script parse(ifstream *scriptfile)
     while ( getline(*scriptfile, line))
     {
 	line_index++;
-	if ( std::tr1::regex_search(line.c_str(),  modes[settings.mode]) )
+	if ( std::tr1::regex_search(line.c_str(),  mode_str) )
 	    command_counter++;
     }
     /* reset states*/
@@ -70,13 +61,13 @@ script parse(ifstream *scriptfile)
     while ( getline(*scriptfile, line))
     {
 	line_index++;
-	if ( std::tr1::regex_search(line.c_str(),  modes[settings.mode]) )
+	if ( std::tr1::regex_search(line.c_str(),  mode_str) )
 	{
 	    if ( command_index < command_counter )
 	    {
 		if ( settings.verbose )
 		    (command_stack+command_index)->line_ued=line_index;
-		(command_stack+command_index)->raw_string=std::tr1::regex_replace(line, modes[settings.mode], "");		//std::cerr << (command_stack+command_index)->raw_string << std::endl;
+		(command_stack+command_index)->raw_string=std::tr1::regex_replace(line, mode_str, "");	
 		boost::split((command_stack+command_index)->args,(command_stack+command_index)->raw_string, boost::is_any_of("\t "));
 		command_index++;
 	    }
