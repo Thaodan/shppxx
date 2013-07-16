@@ -1,5 +1,7 @@
 #ifndef SHPP_HXX
 #define SHPP_HXX
+#include <vector>
+#include <string>
 #include <iostream>
 #include <fstream>
 #include <boost/tr1/regex.hpp>
