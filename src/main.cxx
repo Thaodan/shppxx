@@ -9,6 +9,7 @@ extern "C" {
 
 
 #define DEFAULT_OUTPUT STDOUT
+#define DEFAULT_MODE "shpp"
 state_container settings;
 
 int main(int argc, char *argv[])
@@ -29,7 +30,7 @@ int main(int argc, char *argv[])
     std::map<std::string, std::string>::iterator mode_str_it; 
     mode_strs["shpp"] = "#\\\\";
     mode_strs["cpp"] = "#";
-    string mode_str;
+    string mode=DEFAULT_MODE;
     int option_index;
     string inputfile_raw;
     string outputfile_raw;
@@ -45,7 +46,7 @@ int main(int argc, char *argv[])
 	    display_help();
 	    return 0;
 	case 'D':
-	    cout << "stub" << endl;
+	    cerr << "stub" << endl;
 	    break;
 	case 'H':
 	    display_long_help();
@@ -60,7 +61,7 @@ int main(int argc, char *argv[])
 	    inputfile_raw = optarg;
 	    break;
 	case 'm':
-	    mode_str = optarg;
+	    mode = optarg;
 	    break;
 	case 'o':
 	    outputfile_raw = optarg;
@@ -78,18 +79,17 @@ int main(int argc, char *argv[])
 	/*
 	  last should always be input file
 	*/
-	if (inputfile_raw == "" )
-	    inputfile_raw = argv[argc-1];
-      
-	//for (index = optind; index < argc; index++)
-	//switch(argv[index])
+	if (inputfile_raw == "")
+	{
+	    if (argv[optind] != "" )
+		inputfile_raw = argv[argc-1];
+	    else
+	    {
+		cerr << "Need input file" << endl;
+		return 1;
+	    }
+	}
     }  
-
-    else
-    {
-	cerr << "Need input file" << endl;
-	return 1;
-    }
 
     if ( ! boost::filesystem::exists( inputfile_raw ) )
     {
@@ -106,10 +106,10 @@ int main(int argc, char *argv[])
     /*
       check if parse mode is cpp
     */
-    mode_str_it = mode_strs.find(mode_str);
+    mode_str_it = mode_strs.find(mode);
     if ( mode_str_it == mode_strs.end() )
     {
-	cerr << "Unkown mode " << mode_str << endl;
+	cerr << "Unkown mode " << mode << endl;
 	return 1;
     }
     settings.mode_str = mode_str_it->second;
