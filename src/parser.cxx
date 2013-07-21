@@ -37,7 +37,7 @@ script parse(ifstream *scriptfile)
     string line;
     script Script;
     int line_index=0, command_index=0, command_counter=0;
-    std::tr1::regex mode_str( settings.mode_str, REGEX_MODE);
+    std::tr1::regex mode_str( "^"+settings.mode_str, REGEX_MODE);
     std::tr1::regex end_line("\n");
     std::tr1::regex end_char(";");
     std::tr1::cmatch match;

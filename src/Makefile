@@ -3,7 +3,7 @@ TARGET=shppc
 TARGET_VER=0.1
 OBJS=main.o help.o follow.o parser.o commands/end.o commands/else.o commands/messages.o
 HEADER=shpp.hxx help.hxx commands/commands.hxx 
-override CXXFLAGS+=-std=c++11 -Wall 
+override CXXFLAGS+=-std=c++11 -Wall -pipe
 LINK_FLAGS = -lboost_regex -lboost_filesystem -lboost_system
 
 all: $(TARGET)

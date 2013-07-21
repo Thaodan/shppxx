@@ -73,24 +73,21 @@ int main(int argc, char *argv[])
         }
     }
 
-    	cout << optind << endl;
-    if ( optind < argc && argc > 1)
+    /*
+      last should always be input file
+    */
+    if (inputfile_raw == "")
     {
-	/*
-	  last should always be input file
-	*/
-	if (inputfile_raw == "")
+	if ( argc > optind )
+	    inputfile_raw = argv[optind];
+	else
 	{
-	    if (argv[optind] != "" )
-		inputfile_raw = argv[argc-1];
-	    else
-	    {
-		cerr << "Need input file" << endl;
-		return 1;
-	    }
+	    cerr << "Need input file" << endl;
+	    return 1;
 	}
-    }  
-
+    }
+    
+    
     if ( ! boost::filesystem::exists( inputfile_raw ) )
     {
 	cerr << inputfile_raw << " not found" << endl;
