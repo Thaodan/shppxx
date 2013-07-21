@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
 {
     float appver=APPVER;
     int stdoutput=0;
-#define INPUT_OPTIONS "hHVvf:o:"
+#define INPUT_OPTIONS "D:hHVvf:o:"
     static struct option long_options[] {
 	{ "help", 0, 0, 'h' },
 	{ "long-help",0 , 0,'H'},
@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
     mode_strs["shpp"] = "#\\\\";
     mode_strs["cpp"] = "#";
     string mode_str;
-    int optind = 0, option_index = 0;
+    int option_index;
     string inputfile_raw;
     string outputfile_raw;
     while ( (input_character = getopt_long(argc, argv, INPUT_OPTIONS, long_options, &option_index)) != -1 )
@@ -44,6 +44,9 @@ int main(int argc, char *argv[])
         case 'h':
 	    display_help();
 	    return 0;
+	case 'D':
+	    cout << "stub" << endl;
+	    break;
 	case 'H':
 	    display_long_help();
 	    return 0;
@@ -69,6 +72,7 @@ int main(int argc, char *argv[])
         }
     }
 
+    	cout << optind << endl;
     if ( optind < argc && argc > 1)
     {
 	/*
