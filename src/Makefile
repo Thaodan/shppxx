@@ -5,7 +5,7 @@ TARGET_VER=0.1
 COMMANDS=messages\
 	core
 OBJS=main.o help.o follow.o parser.o 
-HEADERS=shpp.hxx help.hxx commands/commands.hxx 
+HEADERS=shpp.hxx help.hxx 
 
 LINK_FLAGS = -lboost_regex -lboost_filesystem -lboost_system
 
@@ -14,7 +14,7 @@ all: $(TARGET)
 $(COMMANDS): 
 	$(MAKE) -C commands/$(@)
 
-all_commands.hxx: $(COMMANDS)
+all_commands.hxx: 
 	rm -f $(@)
 	for include in $$(find $(INCLUDE_PATH) -type f ! -iname \*~) ; do\
 		echo "#include \"$$include\"" >> all_commands.hxx;\
