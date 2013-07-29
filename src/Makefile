@@ -25,13 +25,17 @@ all_commands.hxx:
 config.hxx:
 	echo "#define APPNAME  \"$(TARGET)\"" > config.hxx
 	echo "#define APPVER $(TARGET_VER)" >> config.hxx
-clean:
-	rm -f $(TARGET)
-	rm -rf $(OBJS)
-	rm -f config.hxx
 
 $(TARGET): $(OBJS) $(HEADER) $(COMMANDS) config.hxx 
 	$(CXX) $(CXXFLAGS) $(LINK_FLAGS) $(OBJS) $(shell find commands -type f -name \*.o) -o $@
 
+
+clean:
+	rm -f $(TARGET)
+	rm -f $(OBJS)
+	rm -f config.hxx
+	for cmd in $(COMMANDS) ; do\
+		$(MAKE) -C commands/$$cmd clean;\
+	done
 
 .PHONY: all clean $(COMMANDS)
