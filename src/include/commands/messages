@@ -1,0 +1,6 @@
+// -*- C++ -*-
+namespace msg {
+    void msg(string message);
+    void verbose(string message);
+    bool error(string message);
+}

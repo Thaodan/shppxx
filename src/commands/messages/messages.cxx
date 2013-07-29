@@ -1,5 +1,5 @@
-#include "../shpp.hxx"
-#include "commands.hxx"
+#include "shpp.hxx"
+#include  <commands/messages>
 namespace msg {
     void msg(string message)
     {
@@ -18,3 +18,4 @@ namespace msg {
 	return false;
     }
 }
+

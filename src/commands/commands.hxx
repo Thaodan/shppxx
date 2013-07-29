@@ -12,7 +12,6 @@ bool end(void);
 
 /*
   msgs
-
  */
 namespace msg {
     void msg(string message);

@@ -1,5 +1,5 @@
-#include "../shpp.hxx"
-#include "commands.hxx"
+#include "shpp.hxx"
+#include <commands/core>
 
 bool Else(void)
 {

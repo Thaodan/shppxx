@@ -1,5 +1,5 @@
 #include "shpp.hxx"
-#include "commands/commands.hxx"
+#include "all_commands.hxx"
 
 /* the control part of our parser, it creates streams and calls our sub functions*/
 bool parser(string scriptfile_raw, string outputfile_raw)

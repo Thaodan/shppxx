@@ -1,4 +1,4 @@
-#include "../shpp.hxx"
+#include "shpp.hxx"
 bool end(void)
 {
     /* follow current command and see if father of it is if */
