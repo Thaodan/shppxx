@@ -1,0 +1,58 @@
+#+TITLE: Progress
+* Example 1
+** Raw script code
+#+NAME: part1
+#+BEGIN_SRC perl
+1:#\\define expression1 TET
+2:#\\if @expression@ 
+3:#\\     msg "Hello World!"
+4:#\\else @expression1@
+5:#\\     msg "Goodbye World"
+6:#\\end
+#END_SRC
+
+** Code as executed in c++ that does the execute part
+#+NAME: part2
+#+BEGIN_SRC cpp
+1:define( "expression1", "TET"); 
+2:if(); defined(expression); 
+3:      msg("Hello World!");
+4:else(); defined(expression2);
+5:     msg("Goodbye World");
+6:end();
+#END_SRC
+
+** Code as c++ that does the file edit part
+Empty as no text is present.
+
+* Example 2
+Now with text.
+** Raw script code
+#+NAME: part1
+#+BEGIN_SRC perl
+1:#\\define expression TET
+2:#\\if @expression@ 
+3:Hello World!
+4:#\\else @expression1@
+5:Goodbye World!
+6:#\\end
+#END_SRC
+   
+** Code as executed in c++ that does the execute part
+#+NAME: part2
+#+BEGIN_SRC cpp
+1:define( "expression", "TET") 
+2:if(); defined(expression);
+3://<TEXT>
+4:else(); defined(expression1);
+5://<TEXT>
+6:end();
+#END_SRC
+
+** Code as c++ that does the file edit part
+#+NAME: part3
+#+BEGIN_SRC cpp
+3://<TEXT>
+4:del(4-6);
+5://<TEXT>
+#END_SRC
