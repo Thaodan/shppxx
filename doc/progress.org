@@ -9,7 +9,7 @@
 4:#\\else @expression1@
 5:#\\     msg "Goodbye World"
 6:#\\end
-#END_SRC
+#+END_SRC
 
 ** Code as executed in c++ that does the execute part
 #+NAME: part2
@@ -20,7 +20,7 @@
 4:else(); defined(expression2);
 5:     msg("Goodbye World");
 6:end();
-#END_SRC
+#+END_SRC
 
 ** Code as c++ that does the file edit part
 Empty as no text is present.
@@ -36,7 +36,7 @@ Now with text.
 4:#\\else @expression1@
 5:Goodbye World!
 6:#\\end
-#END_SRC
+#+END_SRC
    
 ** Code as executed in c++ that does the execute part
 #+NAME: part2
@@ -47,7 +47,7 @@ Now with text.
 4:else(); defined(expression1);
 5://<TEXT>
 6:end();
-#END_SRC
+#+END_SRC
 
 ** Code as c++ that does the file edit part
 #+NAME: part3
@@ -55,4 +55,4 @@ Now with text.
 3://<TEXT>
 4:del(4-6);
 5://<TEXT>
-#END_SRC
+#+END_SRC
