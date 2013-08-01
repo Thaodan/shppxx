@@ -1,0 +1,52 @@
+#+TITLE: Syntax
+This describes the syntax of the redesigned version of shpp - shppc
+NOTE: Some notes:
+- most stuff NYI
+- Currently its more or less like shpp (subject to change applies).
+  all example if not noted are without preprocessor code marker 
+  eg. '#\\' for shpp(x)
+- all commands that were mentioned in text are marked with '/command/'
+  eg. '/end/'
+- all commands that are here mentioned are documented in [[file:commands.org]]
+* Commands that start  blocks
+This Commands that can have more than one argument like '/if/'.
+If the command has an argument and it follows no '/end/' until there is a new multi-line command, 
+the command is ended. If it has no argument the next line depends on the return status of it,
+either as code or as text that is removed or not like [[if one line][here]]. If a '/end/' follows the command , before 
+there is a new  multi-line command or if there a new '/end/' after a multi-line command is ended , all code or text depends on the return status of the command like [[if multi line][here.]]
+* Conditions
+** condition
+- if is optional 
+Syntax examples:\\
+*If example one for one line if (like in c/c++).*
+#+NAME: if one line
+#+BEGIN_SRC perl
+if @expression@ 
+#+END_SRC 
+
+*if example for that allows applies to every line till endif*.
+#+NAME: if multi line
+#+BEGIN_SRC perl
+if @expression@
+  defined VAR
+  msg "hello guys"
+  end
+end
+#+END_SRC
+
+
+** else
+Opens a new condition if the condition is /NULL/, return /true/.
+Example:
+#+NAME: if one line
+#+BEGIN_SRC perl
+if @expression@ 
+msg "Hello World!"
+else @expression@
+msg "Goodbye World"
+end
+#+END_SRC 
+
+** end
+Ends code block.
+Examples see [[if multi line][here.]]

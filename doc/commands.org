@@ -1,0 +1,24 @@
+#+TITLE: Commands
+This are all commands if there is no x in /Done/ the command is *NYI*.
+All command have /true/ as successful return status and /false/ as unsuccessful  return status, if not noted.
+
+
+| Name    | Description                                                   | Section (folder in commands)       | return status successful (bool) | return status unsuccessful (bool) | Done |
+|---------+---------------------------------------------------------------+------------------------------------+---------------------------------+-----------------------------------+------|
+| if      | mostly ignored only requires that next arg is an /expression/ | core ( commands in this            |                                 |                                   |      |
+| else    | marks code/text after an expression/command                   | section are not really             |                                 |                                   |      |
+| end     | ends block                                                    | commands, they are mostly          |                                 |                                   |      |
+|         |                                                               | items for the syntax parser,       |                                 |                                   |      |
+|         |                                                               | this is the reason why they        |                                 |                                   |      |
+|         |                                                               | are described in [[file:syntax.org]] ) |                                 |                                   |      |
+|---------+---------------------------------------------------------------+------------------------------------+---------------------------------+-----------------------------------+------|
+|         |                                                               | var                                |                                 |                                   |      |
+| defined | test if var is defined                                        |                                    |                                 |                                   |      |
+| define  | define var                                                    |                                    |                                 |                                   |      |
+| =       | define var                                                    |                                    |                                 |                                   |      |
+| undef   | undefine var                                                  |                                    |                                 |                                   |      |
+|---------+---------------------------------------------------------------+------------------------------------+---------------------------------+-----------------------------------+------|
+| msg     | display msg                                                   | msg                                |                                 |                                   |      |
+| warning | display warning msg                                           |                                    | if not ~@Werr_warning@~         |                                   |      |
+| error   | display error msg                                             |                                    | false                           |                                   |      |
+| verbose | display msg if @Wverbose@                                     |                                    |                                 |                                   |      |
