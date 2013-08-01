@@ -22,7 +22,7 @@ Syntax examples:\\
 #+NAME: if one line
 #+BEGIN_SRC perl
 if @expression@
-msg @expression@
+   msg @expression@
 #+END_SRC 
 
 *if example for that allows applies to every line till endif*.
@@ -30,7 +30,7 @@ msg @expression@
 #+BEGIN_SRC perl
 if @expression@
   defined VAR
-  msg "hello guys"
+     msg "hello guys"
   end
 end
 #+END_SRC
@@ -42,9 +42,9 @@ Example:
 #+NAME: if one line
 #+BEGIN_SRC perl
 if @expression@ 
-msg "Hello World!"
+     msg "Hello World!"
 else @expression@
-msg "Goodbye World"
+     msg "Goodbye World"
 end
 #+END_SRC 
 
